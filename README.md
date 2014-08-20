@@ -1,4 +1,4 @@
 gereji-broker
 =============
 
-Event broker.
+This is an event broker for the gereji web application framework.
