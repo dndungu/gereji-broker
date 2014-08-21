@@ -1,6 +1,6 @@
 {
   "name": "gereji-broker",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "An event broker helper for the gereji web application framework.",
   "main": "broker.js",
   "scripts": {
