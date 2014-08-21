@@ -1,18 +1,12 @@
 "use strict";
-var fs = require("fs");
 module.exports = function(){
 	var self = {
-		events: [],
-		store: {}
+		events: []
 	};
 	return {
 		init: function(){
 			self.events = [];
 		},
-        set : function(name, value) {
-            self.store[name] = value;
-            return this;
-        },
 		on : function() {
 			var types = typeof arguments[0] == "string" ? [ arguments[0] ] : arguments[0];
 			for ( var i in types) {
@@ -25,16 +19,14 @@ module.exports = function(){
 			event = typeof event == "string" ? {type : event, data : {}} : event;
 			event.data = typeof event.data == "undefined" ? {} : event.data;
 			try{
-				self.store.context.log(5, event);
+				this.emit({type : "log", data : event});
 				var listeners = self.events[event.type];
-				if(!listeners)
-					throw new Error('There  are no event listeners for ' + event.type);
 				for(var i in listeners){
-					if(typeof listeners[i] === 'function')
+					if(typeof listeners[i] == 'function')
 						listeners[i](event);
 				}
 			}catch(error){
-				self.store.context.log(2, error.stack);
+				this.emit({type : "log", data : error.stack});
 			}
 		}
 	}
